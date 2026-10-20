@@ -1,0 +1,304 @@
+
+
+/* ---------------------------------------------------------
+The Combination — token system
+ Color:    #14182B (ink)    #1D2340 (panel)   #C9A24B (brass)
+           #EDE7DA (paper) #4A7A87 (teal/low) #B5533C (rust/high)
+ Type:     Fraunces (display) JetBrains Mono (numerals + utility)
+ --------------------------------------------------------- */
+
+
+:root {
+ --ink:        #11142399;
+  --bg:        #14182B;
+  --panel:   #1B2140;
+  --panel-2: #232B52;
+  --brass:     #C9A24B;
+  --brass-dim: #8C7238;
+  --paper:   #EDE7DA;
+  --paper-dim: #A7A6AE;
+  --teal:      #5C9AA6;
+  --rust:      #C06A4C;
+  --radius:    2px;
+}
+
+
+* { box-sizing: border-box; }
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+        radial-gradient(circle at 50% 0%, #202748 0%, #14182B 55%),
+        var(--bg);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  padding: 32px 20px;
+}
+
+
+.vault {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+
+/* ---- header ---- */
+
+
+.vault__eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--brass-dim);
+  margin-bottom: 14px;
+}
+
+
+.vault__title {
+ font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  font-size: 40px;
+  line-height: 1.05;
+  margin: 0 0 10px;
+  color: var(--paper);
+    letter-spacing: -0.01em;
+}
+
+
+.vault__subtitle {
+ margin: 0 0 36px;
+ font-size: 13px;
+ color: var(--paper-dim);
+ letter-spacing: 0.02em;
+}
+
+
+/* ---- the dial ---- */
+
+
+.dial {
+ margin: 0 auto 28px;
+ width: 220px;
+ height: 220px;
+ border-radius: 50%;
+ background: var(--panel);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ position: relative;
+ border: 1px solid #2B3260;
+ box-shadow:
+     inset 0 0 0 1px #00000040,
+     0 20px 50px -20px #00000080;
+ transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+
+.dial::before {
+ content: "";
+ position: absolute;
+ inset: 14px;
+ border-radius: 50%;
+ border: 1px dashed #33396350;
+}
+
+
+.dial__ring {
+ width: 168px;
+ height: 168px;
+ border-radius: 50%;
+ background: var(--panel-2);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ box-shadow: inset 0 2px 12px #00000060;
+}
+
+
+.dial__readout {
+ font-family: 'JetBrains Mono', monospace;
+ font-weight: 700;
+ font-size: 30px;
+ letter-spacing: 0.08em;
+ color: var(--brass);
+ transition: color 0.3s ease;
+}
+
+
+.dial--low .dial__readout     { color: var(--teal); font-size: 20px; }
+.dial--high .dial__readout { color: var(--rust); font-size: 20px; }
+.dial--invalid .dial__readout { color: var(--paper-dim); font-size: 16px; }
+.dial--correct .dial__readout { color: var(--brass); font-size: 34px; }
+
+
+.dial--low     { box-shadow: 0 0 0 1px var(--teal), 0 0 40px -12px var(--teal); border-color: var(--teal); }
+.dial--high    { box-shadow: 0 0 0 1px var(--rust), 0 0 40px -12px var(--rust); border-color: var(--rust); }
+.dial--correct { box-shadow: 0 0 0 1px var(--brass), 0 0 55px -10px var(--brass); border-color: var(--brass);
+}
+/* ---- form ---- */
+
+
+.form__label {
+ display: block;
+ font-size: 11px;
+ letter-spacing: 0.2em;
+ color: var(--paper-dim);
+ margin-bottom: 8px;
+ text-transform: uppercase;
+}
+
+
+.form__row {
+ display: flex;
+ gap: 8px;
+}
+
+
+input[type="number"] {
+ flex: 1;
+ background: var(--panel);
+ border: 1px solid #333B6B;
+ border-radius: var(--radius);
+ color: var(--paper);
+ font-family: 'JetBrains Mono', monospace;
+ font-size: 18px;
+ padding: 12px 14px;
+ text-align: center;
+ min-width: 0;
+}
+
+
+input[type="number"]:focus {
+ outline: none;
+ border-color: var(--brass);
+ box-shadow: 0 0 0 3px #C9A24B33;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+
+
+.btn {
+ font-family: 'JetBrains Mono', monospace;
+ font-size: 13px;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ border-radius: var(--radius);
+ border: none;
+ padding: 12px 18px;
+ cursor: pointer;
+ transition: transform 0.15s ease, background 0.15s ease;
+ white-space: nowrap;
+}
+
+
+.btn--primary {
+ background: var(--brass);
+ color: #1B1B1B;
+ font-weight: 700;
+}
+
+
+.btn--primary:hover { background: #DAB666; transform: translateY(-1px); }
+.btn--primary:active { transform: translateY(0); }
+
+
+/* ---- feedback / meta ---- */
+.hint {
+ font-size: 12px;
+ letter-spacing: 0.05em;
+ margin: 0 0 14px;
+}
+
+
+.hint--invalid { color: var(--rust); }
+
+
+.result {
+ font-family: 'Fraunces', serif;
+ font-size: 18px;
+ color: var(--paper);
+ margin: 0 0 18px;
+}
+
+
+.result strong { color: var(--brass); }
+
+
+.meta {
+ margin: 18px 0 0;
+ font-size: 12px;
+ color: var(--paper-dim);
+ letter-spacing: 0.04em;
+}
+
+
+.meta strong { color: var(--paper); }
+
+
+.link-btn {
+ background: none;
+ border: none;
+ color: var(--teal);
+ font-family: 'JetBrains Mono', monospace;
+ font-size: 12px;
+ text-decoration: underline;
+ text-underline-offset: 3px;
+ cursor: pointer;
+ margin-left: 10px;
+ padding: 0;
+}
+
+
+.link-btn:hover { color: var(--brass); }
+
+
+/* ---- guess history ---- */
+
+
+.history {
+ list-style: none;
+ display: flex;
+ flex-wrap: wrap;
+ gap: 6px;
+ justify-content: center;
+ margin: 26px 0 0;
+ padding: 18px 0 0;
+ border-top: 1px solid #232B52;
+}
+
+
+.history__n {
+ display: inline-block;
+ min-width: 26px;
+ padding: 4px 6px;
+ font-size: 11px;
+ color: var(--paper-dim);
+ background: var(--panel);
+ border: 1px solid #2B3260;
+ border-radius: var(--radius);
+}
+
+
+.history li:first-child .history__n {
+    color: var(--brass);
+ border-color: var(--brass-dim);
+}
+
+
+@media (max-width: 400px) {
+ .dial { width: 180px; height: 180px; }
+ .dial__ring { width: 136px; height: 136px; }
+ .vault__title { font-size: 32px; }
+}
