@@ -1,127 +1,135 @@
-# The Combination — Guess the Number Game
+# Guess the Number Game
 
-A single-page PHP mini-project where the server locks a random number
-between 1 and 100 inside a "combination dial," and the player has to
-crack it by guessing, using "Too High" / "Too Low" hints and an
-attempt counter.
-
----
+A PHP-based Guess the Number Game mini project developed using HTML, CSS and PHP.
 
 ## Student Details
 
-| Field | Value |
-|---|---|
-| Name | Bhoomi |
-| Roll Number | 2442952 |
-| Class | BCA 5th Semester |
-| Subject | PHP |
+**Name:** Bhoomi  
+**Roll Number:** 2442952  
+**Course:** Bachelor of Computer Applications (BCA), 5th Semester  
+**Subject:** PHP  
+**Project Name:** Guess the Number Game
 
 ## Project Objective
 
-Build a web application where the computer generates a random number
-(1–100). The user enters guesses through an HTML form, and the app
-displays **Too High**, **Too Low**, or **Correct**, counting the total
-number of attempts until the number is guessed correctly.
+The objective of this mini-project is to develop a web-based Guess the Number Game using HTML, CSS and PHP.
+
+The computer generates a random number between 1 and 100. The user enters guesses through an HTML form, and the application displays **Too High**, **Too Low** or **Correct** for each guess.
+
+The application counts the total number of attempts and displays it when the user guesses the correct number.
 
 ## Features
 
-- Random number generation (1–100) using PHP's cryptographically
-  secure `random_int()`.
-- Guess submitted via an HTML `<form>`, validated and processed in PHP.
-- Instant **Too High / Too Low** hints on the dial, and a **Correct!** message with the total attempts on a win.
-- Live **attempt counter**.
-- **Guess history** strip showing every number tried, most recent first.
-- **Start over** control to abandon the current round early.
-- **Play again** flow that locks a fresh number after a win.
-- Server-side input validation (rejects non-numbers and out-of-range
-  guesses without crashing or losing game state).
-- Fully responsive, single-file-styled UI with no JavaScript required
-  — the game works with pure HTML forms and PHP sessions.
+- Generates a random number between 1 and 100.
+- Accepts guesses through an HTML form.
+- Displays "Too High" when the guess is greater than the number.
+- Displays "Too Low" when the guess is smaller than the number.
+- Displays "Correct!" when the number is guessed.
+- Counts and displays the total number of attempts.
+- Shows the history of all guesses made.
+- Rejects invalid input (blank, text, decimals, or numbers outside 1–100).
+- "Start over" option to begin a new game at any time.
+- "Lock a new number" button to play again after winning.
+- Responsive design that works on mobile and desktop.
+- No database is used; the game state is stored in a PHP session.
 
-## Algorithm / Flowchart
+## Algorithm
 
-```
-START
-  |
-  v
-Is there an active game in the session?
-  NO  -> generate secret number (1-100), reset attempts to 0
-  YES -> keep existing secret number and attempts
-  |
-  v
-Show the dial (idle / hint / result) and the guess form
-  |
-  v
-Has the user submitted a guess?
-  NO  -> wait (END of this request)
-  YES -> continue
-  |
-  v
-Is the guess a valid integer between 1 and 100?
-  NO  -> show "Enter a whole number between 1 and 100." -> back to form
-  YES -> continue
-  |
-  v
-attempts = attempts + 1
-add guess to history
-  |
-  v
-Compare guess to secret number
-  guess <  secret -> show "TOO LOW"
-  guess >  secret -> show "TOO HIGH"
-  guess == secret -> mark solved, show "Correct!" + total attempts
-  |
-  v
-Solved?
-  NO  -> loop back to the guess form
-  YES -> show "Lock a new number" button -> restarts flow at the top
-  |
-  v
-END
-```
+1. Start the program.
+2. Start a PHP session.
+3. If no game is running, generate a random number between 1 and 100 and set attempts to 0.
+4. Display the guess input form.
+5. Accept the guess from the user.
+6. Check whether the guess is a whole number between 1 and 100. If not, display an error message and go to step 4.
+7. Increase the attempt count by 1 and add the guess to the history.
+8. If the guess is greater than the number, display "Too High" and go to step 4.
+9. If the guess is smaller than the number, display "Too Low" and go to step 4.
+10. If the guess is equal to the number, display "Correct!" with the total number of attempts.
+11. If the user clicks "Lock a new number", go to step 3.
+12. End.
+
+## Flowchart
+
+Start
+
+↓
+
+Generate Random Number (1–100), Attempts = 0
+
+↓
+
+Enter Guess
+
+↓
+
+Valid Number (1–100)? — No → Show Error → Enter Guess
+
+↓ Yes
+
+Attempts = Attempts + 1
+
+↓
+
+Compare Guess with Number
+
+↓
+
+Guess > Number → Too High → Enter Guess
+
+Guess < Number → Too Low → Enter Guess
+
+Guess = Number → Correct!
+
+↓
+
+Display Total Attempts
+
+↓
+
+End
 
 ## Technologies Used
 
-- **HTML5** — page structure and the guess form
-- **CSS3** — the "combination lock" dial UI, states, and responsive layout
-- **PHP** (no framework) — random number generation, form handling,
-  validation, and game-state persistence via `$_SESSION`
-- **Google Fonts** — Fraunces (display) and JetBrains Mono (numerals/UI)
-
-No database is used — game state lives entirely in the PHP session for
-the duration of the round, as required by the assignment.
+- HTML5
+- CSS3
+- PHP
+- XAMPP
+- Apache Server
 
 ## Steps to Run
 
-1. Make sure PHP is installed (PHP 7.4+ recommended).
-   - Check with: `php -v`
-2. Clone this repository and move into it:
-   ```bash
-   git clone https://github.com/bhardwajbhoomi017-prog/2442952_GuessTheNumberGame.git
-   cd 2442952_GuessTheNumberGame
-   ```
-3. Start PHP's built-in development server from the project folder:
-   ```bash
-   php -S localhost:8000
-   ```
-4. Open your browser at:
-   ```
-   http://localhost:8000/index.php
-   ```
-5. Enter a guess between 1 and 100 and click **Turn dial**. Keep
-   guessing until the dial shows the correct number, then click
-   **Lock a new number** to play again.
+1. Install XAMPP.
+2. Open the XAMPP Control Panel.
+3. Start the Apache server.
+4. Copy the project folder into the `htdocs` directory.
+5. Open a web browser.
+6. Enter:
+
+   `http://localhost/2442952_GuessTheNumberGame/`
+
+7. Enter a number between 1 and 100.
+8. Click the **Turn Dial** button.
+9. Follow the "Too High" / "Too Low" hints until the correct number is guessed.
+10. Click **Lock a new number** to play again.
 
 ## Output Screenshots
 
-**Start screen**
+### Start Page
 
-![Start screen](assets/output-start.png)
+![Start Page](screenshots/start.png)
 
-**"Too Low" feedback**
+### Too High
 
-![Too Low feedback](assets/output-too-low.png)
+![Too High](screenshots/too-high.png)
 
-**Correct guess**
+### Too Low
 
-![Correct guess](assets/output-correct.png)
+![Too Low](screenshots/too-low.png)
+
+### Invalid Input
+
+![Invalid Input](screenshots/invalid.png)
+
+### Correct Guess
+
+![Correct Guess](screenshots/correct.png)
